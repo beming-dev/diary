@@ -1,8 +1,11 @@
 import { Button, Flex, Input } from "@chakra-ui/react";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export default function Home() {
+  const router = useRouter();
+
   const [input1, setInput1] = useState("");
   const [input2, setInput2] = useState("");
   const [input3, setInput3] = useState("");
@@ -17,6 +20,8 @@ export default function Home() {
           input2,
           input3,
         },
+      }).then(() => {
+        router.push("/diary");
       });
     }
   };
@@ -24,7 +29,7 @@ export default function Home() {
   return (
     <Flex
       w="100vw"
-      h="100vh"
+      h="calc(100vh - 60px)"
       flexDir="column"
       justify="center"
       alignItems="center"

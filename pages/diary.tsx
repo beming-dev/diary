@@ -4,13 +4,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-
-interface diaryType {
-  description: string;
-  id: number;
-  point: string;
-  title: string;
-}
+import { diaryType } from "../global";
+import { withSessionSsr } from "../lib/withSession";
 
 const defaultDiary = {
   description: "",
@@ -18,6 +13,26 @@ const defaultDiary = {
   point: "",
   title: "",
 };
+
+export const getServerSideProps = withSessionSsr(
+  async function getServerSideProps({ req }: any) {
+    if (req.session.user && req.session.user.login) {
+      return {
+        props: {
+          user: req.session.user,
+        },
+      };
+    } else {
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/",
+        },
+        props: {},
+      };
+    }
+  }
+);
 
 export default function Diary() {
   const [diary, setDiary] = useState<diaryType>(defaultDiary);
@@ -39,13 +54,19 @@ export default function Diary() {
   };
 
   useEffect(() => {
+    setTitle(diary.title);
+    setDescription(diary.description);
+  }, [diary]);
+  useEffect(() => {
     axios({
       method: "GET",
       url: "/api/diary",
       params: { date: formatDate(selectedDate) },
-    }).then(({ data }) => {
+    }).then(({ data }: { data: diaryType }) => {
       if (!data) setDiary(defaultDiary);
-      else setDiary(data);
+      else {
+        setDiary(data);
+      }
     });
   }, [selectedDate]);
 
@@ -59,15 +80,22 @@ export default function Diary() {
       method: "POST",
       url: "/api/diary",
       data: { date: formatDate(selectedDate), title, description },
-    });
+    })
+      .then(() => {
+        alert("저장이 완료됐습니다.");
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("저장에 실패했습니다.");
+      });
   };
 
   return (
-    <Flex w="100vw" h="100vh" align="center" justify="center">
+    <Flex w="100vw" h="calc(100vh - 60px)" align="center" justify="center">
       <Flex
         flexDir="column"
         w="600px"
-        h="610px"
+        h={["500px", "610px", "610px"]}
         justify="space-between"
         p="0 10px"
       >
@@ -102,19 +130,19 @@ export default function Diary() {
         </Flex>
         <Input
           w="100%"
-          h="80px"
+          h={["50px", "80px", "80px"]}
           borderRadius="15px"
           bgColor="brand"
           onChange={(e) => setTitle(e.target.value)}
-          value={diary?.title}
+          value={title}
         />
         <Input
           w="100%"
-          h="400px"
+          h={["300px", "400px", "400px"]}
           borderRadius="15px"
           bgColor="brand"
           onChange={(e) => setDescription(e.target.value)}
-          value={diary?.description}
+          value={description}
         />
         <Button w="70px" alignSelf="end" bgColor="brand" onClick={onSaveClick}>
           저장
