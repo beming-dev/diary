@@ -8,7 +8,6 @@ import { withIronSessionApiRoute } from "iron-session/next";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { input1, input2, input3 } = req.body;
-  console.log(input1, input2, input3);
   if (input1 === process.env.NEXT_PUBLIC_ALLOWED_ID) {
     const pbkdf2Promise = util.promisify(crypto.pbkdf2);
     const key = await pbkdf2Promise(input2, input3, 107113, 64, "sha512");
