@@ -12,18 +12,13 @@ export default function Home() {
 
   const onStartClick = () => {
     if (input1.length && input2.length && input3.length) {
-      axios({
-        method: "POST",
-        url: "/api/login",
-        headers: { "Content-Type": "application/json" },
-        data: {
+      axios
+        .post("/api/login", {
           input1,
           input2,
           input3,
-        },
-      }).then(() => {
-        router.push("/diary");
-      });
+        })
+        .then(() => router.push("/diary"));
     }
   };
 
