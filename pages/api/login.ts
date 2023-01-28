@@ -13,8 +13,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     const key = await pbkdf2Promise(input2, input3, 107113, 64, "sha512");
     const hashedPassword = key.toString("base64");
 
-    console.log(hashedPassword);
-
     const result = await executeQuery(
       "SELECT * FROM users WHERE id=? AND password=?",
       [input1, hashedPassword]
