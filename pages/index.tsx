@@ -15,6 +15,7 @@ export default function Home() {
       axios({
         method: "POST",
         url: "/api/login",
+        headers: { "Content-Type": "application/json" },
         data: {
           input1,
           input2,
