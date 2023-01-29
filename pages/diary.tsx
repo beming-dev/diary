@@ -135,6 +135,7 @@ export default function Diary() {
           bgColor="brand"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
+          maxLength={100}
         />
         <Input
           w="100%"
@@ -143,6 +144,7 @@ export default function Diary() {
           bgColor="brand"
           onChange={(e) => setDescription(e.target.value)}
           value={description}
+          maxLength={2000}
         />
         <Button w="70px" alignSelf="end" bgColor="brand" onClick={onSaveClick}>
           저장
