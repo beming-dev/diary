@@ -8,7 +8,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     login: false,
   };
   req.session.destroy();
-  res.status(200).redirect("/");
+  res.status(200).send({});
 }
 
 export default withIronSessionApiRoute(handler, session_option);
