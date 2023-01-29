@@ -1,6 +1,6 @@
 const session_option = {
   cookieName: "diary-cookie",
-  password: "VERYYLONGPASSWORDS1ab1323898esda345q6781!",
+  password: process.env.NEXT_PUBLIC_COOKIE_PW || "fsdklhgskadjlhfkjlsdhfgk23k4",
   maxAge: 60,
 };
 

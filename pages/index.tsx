@@ -34,18 +34,21 @@ export default function Home() {
         w="70%"
         m="10px 0"
         onChange={(e) => setInput1(e.target.value)}
+        maxLength={100}
       ></Input>
       <Input
         type="password"
         w="70%"
         m="10px 0"
         onChange={(e) => setInput2(e.target.value)}
+        maxLength={100}
       ></Input>
       <Input
         type="password"
         w="70%"
         m="10px 0"
         onChange={(e) => setInput3(e.target.value)}
+        maxLength={100}
       ></Input>
       <Button onClick={onStartClick}>start</Button>
     </Flex>
