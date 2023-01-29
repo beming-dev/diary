@@ -7,7 +7,9 @@ const Nav = () => {
   const router = useRouter();
 
   const onLogoutClick = () => {
-    axios.post("/api/logout");
+    axios.post("/api/logout", {}).then(() => {
+      router.push("/");
+    });
   };
 
   return (
