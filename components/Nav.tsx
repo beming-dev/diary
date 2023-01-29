@@ -7,11 +7,7 @@ const Nav = () => {
   const router = useRouter();
 
   const onLogoutClick = () => {
-    axios({
-      url: "/api/logout",
-    }).then(() => {
-      router.push("/");
-    });
+    axios.post("/api/logout");
   };
 
   return (
