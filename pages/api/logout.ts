@@ -4,6 +4,9 @@ import { session_option } from "../../config/cookie";
 import { withIronSessionApiRoute } from "iron-session/next";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  req.session.user = {
+    login: false,
+  };
   req.session.destroy();
   res.status(200).send({});
 }
