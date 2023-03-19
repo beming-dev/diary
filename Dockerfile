@@ -2,10 +2,11 @@ FROM node:18
 
 WORKDIR /app
 
-RUN npm install -g yarn
+RUN npm install --force -g yarn
 
 COPY package.json ./
 COPY yarn.lock ./
+COPY .env ./
 
 RUN yarn
 
