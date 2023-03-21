@@ -6,7 +6,6 @@ RUN npm install --force -g yarn
 
 COPY package.json ./
 COPY yarn.lock ./
-COPY .env ./
 
 RUN yarn
 
