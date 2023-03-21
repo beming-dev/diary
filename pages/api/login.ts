@@ -6,9 +6,12 @@ import executeQuery from "../../lib/db";
 import { session_option } from "../../config/cookie";
 import { withIronSessionApiRoute } from "iron-session/next";
 
-async function handler(req: NextApiRequest, res: NextApiResponse) {
+async function handler(
+  req: NextApiRequest & { session: any },
+  res: NextApiResponse
+) {
   const { input1, input2, input3 } = req.body;
-  if (input1 === process.env.NEXT_PUBLIC_ALLOWED_ID) {
+  if (input1 === process.env.ALLOWED_ID) {
     const pbkdf2Promise = util.promisify(crypto.pbkdf2);
     const key = await pbkdf2Promise(input2, input3, 107113, 64, "sha512");
     const hashedPassword = key.toString("base64");
@@ -18,7 +21,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       [input1, hashedPassword]
     );
 
-    if (result[0].length) {
+    if (result && result[0].length) {
       req.session.user = {
         login: true,
       };

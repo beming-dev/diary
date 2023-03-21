@@ -1,11 +1,11 @@
 const mysql = require("mysql2/promise");
 
 const config = {
-  host: process.env.NEXT_PUBLIC_MYSQL_HOST,
-  port: parseInt(process.env.NEXT_PUBLIC_MYSQL_PORT || "3306"),
-  user: process.env.NEXT_PUBLIC_MYSQL_USER,
-  database: process.env.NEXT_PUBLIC_MYSQL_DB,
-  password: process.env.NEXT_PUBLIC_MYSQL_PW,
+  host: process.env.MYSQL_HOST,
+  port: parseInt(process.env.MYSQL_PORT || "3306"),
+  user: process.env.MYSQL_USER,
+  database: process.env.MYSQL_DB,
+  password: process.env.MYSQL_PW,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
