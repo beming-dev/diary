@@ -20,7 +20,6 @@ async function handler(
       "SELECT * FROM users WHERE id=? AND password=?",
       [input1, hashedPassword]
     );
-
     if (result && result[0].length) {
       req.session.user = {
         login: true,

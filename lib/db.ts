@@ -11,22 +11,8 @@ const config = {
   queueLimit: 0,
 };
 
-let pool: any;
-
-(async () => {
-  pool = await mysql.createPool(config);
-  await pool.query(
-    `CREATE TABLE IF NOT EXISTS diary(
-          id INT AUTO_INCREMENT,
-          title VARCHAR(100) NOT NULL,
-          description TEXT NOT NULL,
-          point DATETIME NOT NULl UNIQUE,
-          PRIMARY KEY (ID)
-      )`
-  );
-})();
-
 export default async function executeQuery(query: string, values: any[]) {
+  const pool = await mysql.createPool(config);
   try {
     const result = await pool.query(query, values);
     return result;
