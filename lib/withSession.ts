@@ -18,5 +18,6 @@ export function withSessionSsr<
     context: GetServerSidePropsContext
   ) => GetServerSidePropsResult<P> | Promise<GetServerSidePropsResult<P>>
 ) {
+  console.log(11, process.env.COOKIE_PW);
   return withIronSessionSsr(handler, session_option);
 }
