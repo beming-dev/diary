@@ -12,6 +12,7 @@ async function handler(
 ) {
   const { input1, input2, input3 } = req.body;
   if (input1 === process.env.ALLOWED_ID) {
+    console.log(2);
     const pbkdf2Promise = util.promisify(crypto.pbkdf2);
     const key = await pbkdf2Promise(input2, input3, 107113, 64, "sha512");
     const hashedPassword = key.toString("base64");
