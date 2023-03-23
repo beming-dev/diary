@@ -27,7 +27,10 @@ async function handler(
       };
       await req.session.save();
     }
+    console.log(3);
   }
+  console.log(4);
+
   res.status(200).send({});
 }
 

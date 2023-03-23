@@ -16,6 +16,7 @@ const defaultDiary = {
 
 export const getServerSideProps = withSessionSsr(
   async function getServerSideProps({ req }: any) {
+    console.log(req.session);
     if (req.session.user && req.session.user.login) {
       return {
         props: {

@@ -18,7 +18,10 @@ export default function Home() {
           input2,
           input3,
         })
-        .then(() => router.push("/diary"));
+        .then(() => {
+          console.log("done");
+          router.push("/diary");
+        });
     }
   };
 
