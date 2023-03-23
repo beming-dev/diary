@@ -21,7 +21,9 @@ async function handler(
       "SELECT * FROM users WHERE id=? AND password=?",
       [input1, hashedPassword]
     );
+    console.log(result);
     if (result && result[0].length) {
+      console.log("hoho");
       req.session.user = {
         login: true,
       };
