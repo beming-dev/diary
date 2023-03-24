@@ -19,7 +19,6 @@ export default function Home() {
           input3,
         })
         .then(() => {
-          console.log("done");
           router.push("/diary");
         });
     }

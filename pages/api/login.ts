@@ -12,7 +12,6 @@ async function handler(
 ) {
   const { input1, input2, input3 } = req.body;
   if (input1 === process.env.ALLOWED_ID) {
-    console.log(2);
     const pbkdf2Promise = util.promisify(crypto.pbkdf2);
     const key = await pbkdf2Promise(input2, input3, 107113, 64, "sha512");
     const hashedPassword = key.toString("base64");
@@ -21,17 +20,13 @@ async function handler(
       "SELECT * FROM users WHERE id=? AND password=?",
       [input1, hashedPassword]
     );
-    console.log(result);
     if (result && result[0].length) {
-      console.log("hoho");
       req.session.user = {
         login: true,
       };
       await req.session.save();
     }
-    console.log(3);
   }
-  console.log(4);
 
   res.status(200).send({});
 }
